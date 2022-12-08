@@ -73,6 +73,8 @@ for (const key of allKeys) {
     el = el.target;
     const letter = el.innerText.toLowerCase();
 
+    key.style.pointerEvents = "none";
+
     if (rightAnswerArray.includes(letter)) {
       key.style.backgroundColor = "var(--background-color)";
     } else {
@@ -151,6 +153,7 @@ function newGame() {
 
     for (const key of allKeys) {
       key.style.backgroundColor = null;
+      key.style.pointerEvents = null;
     }
 
     setGame();
