@@ -29,14 +29,6 @@ function setWord() {
   rightAnswerArray = rightAnswer.split("");
 }
 
-//Set Game
-function setGame() {
-  setTip();
-  setWord();
-  wordSpaces();
-}
-setGame();
-
 //Put Space For Words
 function wordSpaces() {
   const rightAnswerField = document.querySelector(".word");
@@ -51,15 +43,17 @@ function wordSpaces() {
 }
 
 //Separate Words
-let wordSpace = [];
-for (let i = 0; i < rightAnswer.length; i++) {
-  if (rightAnswerArray[i] == " ") {
-    wordSpace.push(i);
+function separateWords() {
+  let wordSpace = [];
+  for (let i = 0; i < rightAnswer.length; i++) {
+    if (rightAnswerArray[i] == " ") {
+      wordSpace.push(i);
+    }
   }
-}
 
-for (const index of wordSpace) {
-  allDisplayLetters[index].innerText = "-";
+  for (const index of wordSpace) {
+    allDisplayLetters[index].innerText = "-";
+  }
 }
 
 //Key click Event
@@ -96,6 +90,16 @@ for (const key of allKeys) {
     youWin();
   });
 }
+
+//Set Game
+function setGame() {
+  setTip();
+  setWord();
+  wordSpaces();
+  separateWords();
+  populateGameResultModal();
+}
+setGame();
 
 //You Lose
 function youLose() {
