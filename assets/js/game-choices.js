@@ -23,6 +23,20 @@ const options = [
       "engenheiro",
     ],
   },
+  {
+    tip: "animais",
+    words: [
+      "marmota",
+      "albatroz",
+      "aranha",
+      "iguana",
+      "beija-flor",
+      "camelo",
+      "crocodilo",
+      "jabuti",
+      "papagaio",
+    ],
+  },
 ];
 function getRandom(min, max) {
   min = Math.ceil(min);
