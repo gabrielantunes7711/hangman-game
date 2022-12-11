@@ -56,41 +56,51 @@ function separateWords() {
   }
 }
 
-//Key click Event
+//Display Key click Event
 const allKeys = document.querySelectorAll(".line span");
 const doll = document.querySelector(".doll").children;
 
 let attempt = -1;
 
 for (const key of allKeys) {
-  key.addEventListener("click", (el) => {
-    el = el.target;
-    const letter = el.innerText.toLowerCase();
-
-    key.style.pointerEvents = "none";
-
-    if (rightAnswerArray.includes(letter)) {
-      key.style.backgroundColor = "var(--background-color)";
-    } else {
-      attempt += 1;
-      youLose();
-      key.style.backgroundColor = "var(--primary-color)";
-      doll[attempt].classList.remove("hidden");
-    }
-
-    let letterIndex = [];
-
-    for (let i = 0; i < rightAnswer.length; i++) {
-      if (rightAnswerArray[i] == letter) letterIndex.push(i);
-    }
-
-    for (const index of letterIndex) {
-      allDisplayLetters[index].innerText = letter;
-    }
-    youWin();
+  key.addEventListener("click", () => {
+    SelectKey(key);
   });
 }
 
+//Keyboard Click Event
+document.addEventListener("keypress", (el) => {
+  keyUpperCase = el.key.toUpperCase();
+  key = document.querySelector(`[data-letter="${keyUpperCase}"]`);
+  return key != null ? SelectKey(key) : false;
+});
+
+//Select Key
+function SelectKey(key) {
+  const letter = key.innerText.toLowerCase();
+
+  key.style.pointerEvents = "none";
+
+  if (rightAnswerArray.includes(letter)) {
+    key.style.backgroundColor = "var(--background-color)";
+  } else {
+    attempt += 1;
+    youLose();
+    key.style.backgroundColor = "var(--primary-color)";
+    doll[attempt].classList.remove("hidden");
+  }
+
+  let letterIndex = [];
+
+  for (let i = 0; i < rightAnswer.length; i++) {
+    if (rightAnswerArray[i] == letter) letterIndex.push(i);
+  }
+
+  for (const index of letterIndex) {
+    allDisplayLetters[index].innerText = letter;
+  }
+  youWin();
+}
 //Set Game
 function setGame() {
   setTip();
